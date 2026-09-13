@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Destructing</title>
+</head>
+
+<body>
+
+    <input type="text" name="course" placeholder="Course of Study" id="myInput">
+    <br>
+
+    <button id="myButton">Submit</button>
+
+    <p id="demo"></p>
+    <label id="age"></label><br><br>
+    <label id="course"></label>
+
+    <script>
+        // Get the input and button
+        const inputField = document.getElementById('myInput');
+        const button = document.getElementById('myButton');
+
+        // Add an event listener to the button
+        button.addEventListener('click', function() {
+
+            // Get the value entered in the text field
+            const userData = inputField.value;
+
+            // Create the person object
+            const person = {
+                firstName: "John",
+                lastName: "Doe",
+                age: 50,
+                course: userData
+            };
+
+            // Object destructuring
+            let {
+                firstName,
+                lastName,
+                age,
+                course
+            } = person;
+
+            // Display the values
+            document.getElementById('demo').innerHTML =
+                `First Name: ${firstName}`;
+
+            document.getElementById('age').innerHTML =
+                `Age is ${age}`;
+
+            document.getElementById('course').innerHTML =
+                `Career: ${course}`;
+        });
+    </script>
+
+</body>
+
+</html>

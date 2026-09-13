@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rectangle</title>
+</head>
+
+<body>
+    <input type="text" id="length" placeholder="Enter Length"><br>
+    <input type="text" id="width" placeholder="Enter width"><br><br>
+    <button id="compute">Calculate🤖</button><br><br>
+    <!--Displaying the computed result-->
+    <label id="result"></label>
+    <script>
+        //Get inputs
+        const length = document.getElementById('length');
+        const width = document.getElementById('width');
+
+        //Get our button to use it on event
+        const button = document.getElementById('compute');
+
+        //check for button click
+        button.addEventListener('click', () => {
+            //Get values entered in text area
+            const lengthValue = length.value;
+            const widthValue = width.value;
+
+            //perform calculation
+            const area = (length, width) => length * width;
+
+            //display result
+            document.getElementById('result').innerHTML = `Area Is: ${area(lengthValue, widthValue)}cm^2`;
+        })
+    </script>
+</body>
+
+</html>
