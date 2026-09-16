@@ -1,0 +1,626 @@
+==========What is JSX?=============
+- Stands for JavaScript XML
+- Allows us to write HTML in react
+- JSX makes it easier to write and add HTML in React
+
+
+====Coding JSX====
+- JSX allows us to write HTML elemets in Js and place them in the DOM
+without any createElement() and/or appendChild() methods
+- Conversts HTML tags to react elements.
+
+=====Expressions in JSX========
+- With JSX we can write expressions inside curly braces{ }
+*******************************main.jsx**********************
+const myElement=<h1>React is {5+5} times betwer with JSX</h1>
+************************************************************
+
+
+=========Inserting a Large Block of HTML===========
+- To write HTML on multiple lines, put the HTML inside parantheses.
+- Start a project:
+	cmd>> npm create vite@latest insertHTML -- --template react
+************Example*****************
+import { createRoot } from 'react-dom/client'
+
+//multiple HTML lines
+const myElement=(
+  <ul>
+    <li>Apples</li>
+    <li>Banana</li>
+    <li>Mango</li>
+  </ul>
+);
+
+createRoot(document.getElementById('root')).render(
+  myElement
+)
+***************************************
+
+=======One Top Level Element======
+- HTML code must be wrapped in ONE top level element.
+Two paragraphs can be put in a <div> element:
+***************************************
+import { createRoot } from 'react-dom/client'
+
+//multiple HTML lines
+const myElement=(
+  <div>
+    <p>I am a paragraph</p>
+    <p>Another Paragraph</p>
+  </div>
+);
+
+createRoot(document.getElementById('root')).render(
+  myElement
+)
+
+***************************************
+
+
+==========Elements Must be Closed==========
+- HTML elements must be properly closed
+	const myElement=<input type="text"/>;
+The element above is an open tag
+*************************************************
+import { createRoot } from 'react-dom/client'
+
+//multiple HTML lines
+const myElement=(
+  <div>
+    <input type="text" name="Name" /><br /> <br />
+    <button>Click Me</button>
+  </div>
+);
+
+createRoot(document.getElementById('root')).render(
+  myElement
+)
+**************************************************
+
+========Attribute class`=`className==============
+- Class keyword is reserved in JavaScript.
+- You are not allowed to use it in JSX
+- We use className instead
+Example:
+	const myElement=<h1 className="myclass">Hello WOrld</h1>;
+NOTE: className will be translated to class.
+
+
+========JSX in React Components===========
+- React uses components to build UIs.
+- Components are independent and reusable bits of code.
+- React Components are like JavaScript functions, and return HTML
+- JSX works perfect inside React components.
+****************main.jsx********************
+import { createRoot } from 'react-dom/client'
+
+function Car(){
+  const brand="Ford";
+  const model="Mustang";
+
+  return (
+    <>
+    <h2>My Car</h2>
+    <p>It is a {brand} {model}.</p>
+    </>
+  );
+}
+
+createRoot(document.getElementById('root')).render(
+  <Car/>
+)
+**************************************************
+
+
+
+========Expressions=============
+- Most powerful feature of JSX.
+- Ability to embed JS expressions directly within your markup.
+- We use { } and our JS expressions in between it.
+- React will evaluate expression and render the result in the DOM.
+****************main.jsx******************
+import { createRoot } from 'react-dom/client'
+
+function Car(){
+  return (
+    <>
+    <h1>My Car</h1>
+    <p>It has {218*1.36} horsepower</p>
+    </>
+  );
+}
+
+createRoot(document.getElementById('root')).render(
+  <Car/>
+)
+******************************************
+
+
+=======Variablels=======
+- Refers to a memory holder. Value that changes during program execution.
+- Insert in JSX by wrapping in { }
+****************main.jsx******************
+import { createRoot } from 'react-dom/client'
+
+function Car(){
+  const hp=218*1.36;
+  return (
+    <>
+    <h1>My Car</h1>
+    <p>It has {hp} horsepower</p>
+    </>
+  );
+}
+
+createRoot(document.getElementById('root')).render(
+  <Car/>
+)
+******************************************
+
+
+=======Function Calls=======
+- Function is a block of reusable code.
+- Insert Function calls in JSX by wrapping it in curly braces{}
+************main.jsx******************
+import { createRoot } from 'react-dom/client'
+
+function calcHP(kw){
+  return kw*1.36;
+}
+
+function Car(){
+  return (
+    <>
+    <h1>My Car</h1>
+    <p>It has {calcHP(218)} horsepower</p>
+    </>
+  );
+}
+
+createRoot(document.getElementById('root')).render(
+  <Car/>
+)
+**************************************
+
+
+
+===========Object Properties=============
+- Access object properties within JSX:
+************main.jsx******************
+import { createRoot } from 'react-dom/client'
+
+function Car(){
+  //create an object
+  const myobj={
+    name:'Fiat',
+    model:'500',
+    color:'white'
+  };
+  return (
+    <>
+    <h1>My car is a {myobj.name}. The model {myobj.model} and {myobj.color} in color</h1>
+    </>
+  )
+}
+
+createRoot(document.getElementById('root')).render(
+  <Car/>
+)
+**************************************
+
+
+
+==============JSX Attributes==============
+- Allows you to insert attributes into HTML element.
+
+=====Expressions as Attributes=====
+- Useful in dynamic rendering.
+**********Example************
+function car(){
+  const x="myclass";
+  return (
+    <h1 className={x}>Hello World</h1>
+  )
+}
+*****************************
+
+======camelCase Event Attributes======
+- Event(buttons) attributes in JSX are written in camelCase.
+************main.jsx******************
+import { createRoot } from 'react-dom/client'
+
+function Car(){
+  const myfunc=()=>{
+    alert('Hello World');
+  };
+  return (
+    <button onClick={myfunc}>Click me</button>
+  );
+}
+
+createRoot(document.getElementById('root')).render(
+  <Car/>
+)
+**************************************
+
+
+=============Boolean Attributes===================
+- Pass no value for an attribute, JSX treats it as true.
+- True will make the button disabled, while false enabled.
+	<button onClick={myfunc} disabled={true}>Hello World<button/>
+	<button onClick={myfunc} disabled={false}>Hello World<button/>
+
+=======The Style Attribute========
+- Style attribute in JSX only accepts a JS object with camelCased CSS 
+property names, rather than CSS string.
+************main.jsx**************************
+import { createRoot } from 'react-dom/client'
+
+function Car(){
+  const mystyles={
+    color:"red",
+    fontSize:"20px",
+    backgroundColor: "lightyellow",
+  };
+
+  return (
+    <>
+      <h1 style={mystyles}>My Car</h1>
+    </>
+  )
+}
+
+createRoot(document.getElementById('root')).render(
+  <Car/>
+)
+****************************************************
+- The styles are stored in an object
+- Style properties are written in camelCasing.
+
+
+
+==========JSX If Statements=============
+- They are control structures
+- If block runs when condition evaluates to true
+- React supports if statements, but not inside JSX
+- Put if statements outside the JSX or use a ternary expression instead.
+Option 1: Outside JSX:
+************main.jsx**************************
+import { createRoot } from 'react-dom/client'
+
+function Fruit(){
+  const x=5;
+  let y="Apple";
+
+  if (x<10){
+    y="Banana";
+  }
+
+  return (
+    <>
+      <h1>{y}</h1>
+    </>
+  );
+}
+
+createRoot(document.getElementById('root')).render(
+  <Fruit/>
+)
+**********************************************
+
+Option 2: Ternary Expressions:
+************main.jsx**************************
+import { createRoot } from 'react-dom/client'
+
+function Fruit(){
+  const x=5;
+
+  return (
+    <>
+      <h1>{(x)>10?"Banana":"Apple"}</h1>
+    </>
+  )
+}
+createRoot(document.getElementById('root')).render(
+  <Fruit/>
+)
+**********************************************
+
+
+
+
+
+=============React Components==================
+- Components are independent and reusable bits of code.
+- Server same object as functions, but work in isolation
+and return HTML.
+- Two types:
+	Class Components, and Function Components
+- When creating a react components, the name MUST start with a capital
+letter:
+****************example*******************
+function Car(){
+  return (
+    <h1>Hi, I am a car</h1>
+  )
+}
+********************************************
+
+
+===========Rendering a Component============
+- Now our component is called Car, and returns an <h1> element
+- Use component in your application:
+******************************************
+createRoot(document.getElementById('root')).render(
+  <Car />
+)
+******************************************
+
+
+=================Props====================
+- Arguments can be passed into a component as props, stands for properties.
+- Send arguments into the component as HTML attributes
+***************main.jsx***************
+import { createRoot } from 'react-dom/client'
+
+function Car(props){
+  return (
+    <h2>I am a {props.color} Car!</h2>
+  );
+}
+
+
+createRoot(document.getElementById('root')).render(
+  <Car color="red"/>
+)
+**************************************
+
+
+====================Components in Components===================
+- Refer to components inside other components.
+***************main.jsx***************
+import { createRoot } from 'react-dom/client'
+
+function Car(){
+  return (
+    <h2>I am a car</h2>
+  );
+}
+
+function Garage(){
+  return (
+    <>
+      <h1>Who Lives in my Garage?</h1>
+      <Car/>
+    </>
+  )
+}
+
+createRoot(document.getElementById('root')).render(
+  <Garage/>
+)
+**************************************
+
+
+
+============Rendering a Component Twice================
+- We can render a component multiple times:
+- Use the car component twice inside the garage
+***************main.jsx***************
+import { createRoot } from 'react-dom/client'
+
+function Car(props){
+  return (
+    <h2>I am a {props.brand}</h2>
+  );
+}
+
+function Garage(){
+  return (
+    <>
+      <h1>Who Lives in my Garage?</h1>
+      <Car brand="Ferari"/>
+      <Car brand="BMW"/>
+    </>
+  )
+}
+
+createRoot(document.getElementById('root')).render(
+  <Garage/>
+)
+**************************************
+
+
+=============Components in Files================
+- React is all about re-using code, and it can be a good idea to split your
+components into separate files
+- Create a new file in the "src" directory with a ".jsx" extension
+and put the code:
+************vehicle.jsx****************
+function Car(){
+    return (
+        <>
+            <h2>Hey I am a Car</h2>
+        </>
+    )
+}
+
+export default Car;
+***************************************
+- To be able to use the car component we have to import it in our "main.jsx"
+****************main.jsx*****************************
+import { createRoot } from 'react-dom/client'
+import Car from './vehicle'
+
+createRoot(document.getElementById('root')).render(
+  <Car/>
+)
+******************************************************
+
+
+==============React Props===================
+- React Props are like function arguments in JS and attributes in HTML
+- To send props into a component, use the same syntax as HTML attributes
+*****************************main.jsx**********************************
+import { createRoot } from 'react-dom/client'
+
+function Car(props){
+  return (
+    <>
+      <h2>My car is a {props.brand}. Year: {props.year}. Color: {props.color}</h2>
+    </>
+  );
+}
+
+createRoot(document.getElementById('root')).render(
+  <Car brand="mustang" year="2023" color="Red"/>
+)
+***************************************************************************
+
+
+
+======================Destructuring Props========================
+- You can limit the properties a component receives by using destructuring.
+***************main.jsx********************
+import { createRoot } from 'react-dom/client'
+
+function Car({color}){
+  return (
+    <>
+      <h2>My car is a {color}</h2>
+    </>
+  );
+}
+
+createRoot(document.getElementById('root')).render(
+  <Car brand="mustang" year="2023" color="Red"/>
+)
+*********************************************
+- We limit the number of properties we require by only passing the color
+property only.
+- We use { } for destructuring.
+
+
+
+==========Destructuring ...rest================
+- When we don't know the number of properties received use the ...rest operator.
+***************main.jsx********************
+import { createRoot } from 'react-dom/client'
+
+function Car({color, brand, ...rest}){
+  return (
+    <>
+      <h2>My {brand} car is {color}. Year {rest.year}</h2>
+    </>
+  );
+}
+
+createRoot(document.getElementById('root')).render(
+  <Car brand="mustang" year="2023" color="Red"/>
+)
+*********************************************
+
+
+
+
+=============React Props Children===================
+- In React, you can send the content between the opening and closing tags
+of a component, to another component.
+- Can be accessed in other components using the props.children property
+***************main.jsx********************
+import { createRoot } from 'react-dom/client'
+
+function Son(props){
+  return (
+    <div style={{background: 'lightgreen'}}>
+      <h2>Son</h2>
+      <div>{props.children}</div>
+    </div>
+  );
+}
+
+function Daughter(props){
+  const {brand, model}=props;
+
+  return (
+    <div style={{background: 'lightblue'}}>
+      <h2>Daughter</h2>
+      <div>{props.children}</div>
+    </div>
+  );
+}
+
+function Parent(){
+  return (
+    <div>
+      <h1>My two Children</h1>
+      <Son>
+        <p>
+          This was written in the parent Component,
+          but displayed as part of the Son component
+        </p>
+      </Son>
+      
+      <Daughter>
+        <p>
+          This was written in the parent component, 
+          but displayed as part of the Daughter Component.
+        </p>
+      </Daughter>
+    </div>
+  );
+}
+
+createRoot(document.getElementById('root')).render(
+  <Parent/>
+)
+*********************************************
+
+
+
+===========================React Events==============================
+- Similar to HTML DOM events, React can perform actions based on user events
+- React has the same events as HTML: click, change, mouseover etc
+
+======Adding Events=====
+- React events are written in camelCase.
+	onClick
+- React event handlers are written inside curly braces.
+	onClick={shoot}
+***************main.jsx********************
+import { createRoot } from 'react-dom/client'
+
+function Football(){
+  const shoot=()=>{
+    alert("Greet Shot!");
+  }
+
+  return (
+    <button onClick={shoot}>Take the Shot</button>
+  );
+}
+
+createRoot(document.getElementById('root')).render(
+  <Football/>
+)
+*********************************************
+
+- To pass an argument to an event handler use an arrow function
+***************main.jsx********************
+import { createRoot } from 'react-dom/client'
+
+function Football(){
+  const shoot=(a)=>{
+    alert(a);
+  }
+
+  return (
+    <button onClick={()=>shoot("Goal!")}>Take the Shot</button>
+  );
+}
+
+createRoot(document.getElementById('root')).render(
+  <Football/>
+)
+*********************************************
