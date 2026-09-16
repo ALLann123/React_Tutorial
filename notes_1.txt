@@ -1,0 +1,651 @@
+==========React============
+- Is a JavaScript library for building user interfaces
+- Used to build single page applications
+- Allows us to create reusable UI components
+
+===What is React?===
+- React is a front-end JS library
+- Building UI components
+
+
+=====How does React Work?=====
+- React creates a virtual DOM in memory
+- Instead of manupulating the browser's DOM directly, React creates a virtual
+DOM in memory, where it does all the necessary manipulating, before making
+changes in the browser DOM.
+	"React Changes what needs to be changed"
+
+=====Setting up Environment=====
+- Make sure Node.js installed:
+	cmd>> node -v
+
+===Install a Build Tool(Vite)====
+- Use the Vite build tool to create a React Application.
+- Run this command:
+	cmd>> npm install -g create-vite
+
+======Create a React Application=======
+- Run the command:
+	cmd>> npm create vite@latest my-react-app -- --template react
+my-react-app : is our project name
+Add Y and press enter to continue
+*************Output*******************
+
+  VITE v8.2.2  ready in 2166 ms
+
+  ➜  Local:   http://localhost:5173/
+  ➜  Network: use --host to expose
+  ➜  press h + enter to show help
+**************************************
+
+
+====Modify the React Appp======
+- The initial phase sets up the development environment
+- Modify the default app
+- In my-react-app, find the src folder, inside it, we have a file called
+App.jsx, open it.
+- Delete everything and replace:
+****************************
+function App(){
+  return(
+    <div className="App">
+      <h1>Hello World</h1>
+    </div>
+  );
+}
+
+export default App;
+***********************
+- Changes occur immediately in the browser after we save it.
+
+
+==========React Render HTML=============
+- Goal: render HTML in a web page.
+- React renders Html to the web page via a container, and a function called
+createRoot()
+
+===The Container===
+- React uses a container to render HTML in a web page.
+- The container is in:
+	index.html  ----> We are manipulating the DOM
+<div id="root"></div> element inside it
+
+
+====The CreateRoot Function=====
+- Function is located in the main.jsx file in the src folder, and 
+is a built-in function that is used to create the root node for a React
+application.
+- createRoot() function takes one argument, an HTML element
+- Purpose is to define HTML element where a React component should be displayed
+- To understand rewrite your own createRoot() function:
+********************************************************
+import {createRoot} from 'react-dom/client'
+
+createRoot(document.getElementById('root')).render(
+  <h1>Hello React</h1>
+)
+********************************************************
+- Run our server:
+	cmd>> npm run dev
+Visit the localHost url: http://localhost:5173/
+
+
+======The render Method==========
+- Noticed the render method?
+Defines what to render in the html container
+Results displayed in the <div id="root"> element
+- Add paragraph instead of h1 tag
+N/B: The element id does not have to be "root", but this is the standard convention
+
+
+=========The HTML Code=============
+- HTML code in this tutorial uses JSX, allowing you to write HTML tags inside the
+Js code:
+***************************main.jsx***********************************
+import {createRoot} from 'react-dom/client'
+
+const myelement=(
+  <table>
+    <tr>
+      <th>Name</th>
+    </tr>
+    <tr>
+      <td>John</td>
+    </tr>
+    <tr>
+      <td>Elsa</td>
+    </tr>
+    <tr>
+      <td>Cyndy</td>
+    </tr>
+  </table>
+)
+
+//render
+createRoot(document.getElementById('root')).render(
+  myelement
+)
+******************************************************************************
+
+
+===========The Root Node============
+- Is the HTML element where you want to display the result
+- It is like a container for content, managed by React.
+- Does not Have the <div> element and it does NOT have to have the id='root'
+
+=====Update to the Latest React==========
+- Run:
+	cmd>> npm i react@latest react-dom@latest
+
+
+
+============React ES6============
+- ES6 stands for ECMAScript 6
+
+
+=======Clasess========
+- Blueprint for creating objects.
+- Class: special type of function, but instead of using keyword function
+to initiate it, we use the keyword class, and the properties are assigned
+inside a constructor() method.
+***********Examp****************
+class Car {
+	constructor(name){
+		this.brand=name;
+	}
+}
+********************************
+- When we initiate a class(object created) the constructor method is 
+executed.
+- Standard naming convention caps for the class name first letter.
+- Constructor is called automatically when the object is initialized.
+Object---> an instance of a class, with both properties and methods.🚀
+
+====Method in Classes====
+- Add your own methods in a class:
+- Methods are defined as the behavior of an object
+- They are functions but in JS they do not have the "function" keyword
+when inside a class.
+****************************************
+class Car {
+    //attributes of the class--> the arguments need before creating object
+    constructor(name, year, color) {
+        this.name = name;
+        this.year = year;
+        this.color = color;
+    }
+
+    //methods inside the class
+    display() {
+        console.log(`The Car is called: ${this.name}`);
+        console.log(`Year: ${this.year}`);
+        console.log(`Color: ${this.color}`);
+    }
+}
+
+//create an object
+const mycar = new Car("Ford", 2022, "Red");
+
+//Execute a method 
+mycar.display()
+
+/*
+Classes>node car_class.js
+The Car is called: Ford
+Year: 2022
+Color: Red
+*/
+****************************************
+
+
+
+=============Class Inheritance===============
+- Inheritance is an OOP concept of creating classes based on other classes
+e.g a Derived class inheriting all the attributes and behavior of a base Class
+- We use the extend keyword for inheritance from the baseclass
+- Super() method refers to the parent class.
+
+
+
+==========Arrow Functions==============
+- Arrow functions allow us to write shorter function syntax.
+*********Examp************
+hello = () => {
+    return "Hello World!";
+}
+
+//display
+console.log(hello());
+
+/*
+\Arrow_functions>node hello.js
+Hello World!
+
+*/
+***************************
+
+- Let's get it even more shorter: if the function has only one statement
+and the statement returns a value, you can remove the brackets and the return
+keyword.
+*********************************
+//If the function has one return statement
+hello = () => "Hello World";
+
+console.log(hello());
+
+/*
+Arrow_functions>node shorter_hello.js
+Hello World
+*/
+*********************************
+N/B: Only works only if the function has only one statement
+
+- If you have parameters pass them inside the parantheses:
+*******************************************************
+//pass the arguments in the brackets
+calcArea = (length, width) => length * width;
+
+//call the function and pass the parameters
+console.log(`Area is: ${calcArea(20, 10)}`);
+
+/*
+Arrow_functions>node area_rect.js
+Area is: 200
+*/
+*********************************************************
+
+- If you have one parameter, skip the paranthesses as well:
+********************************************
+//Incase we have one argument
+calcArea = radius => 3.142 * radius * radius;
+
+//call the function
+console.log(`Area: ${calcArea(7)}`);
+
+/*
+Arrow_functions>node circle_area.js
+Area: 153.958
+*/
+******************************************
+
+
+======What About this?========
+- Variable is a name associated to a value that can be changed.
+- Is a memory holder.
+- Three ways to declare a variable:
+	> var
+	> let
+	> const
+- Examp:
+`var x=5.6`
+- If we use var outside a function it belongs to the global scope
+- If we use var inside a function it belongs to that function
+- If used outside a block e.g loop, it is still available outside of that
+block.
+
+- Examp:
+`let x=29`
+- Let is a scope version of var and is limited to the block where defined
+- Has a block scope.
+
+- Examp:
+`const x=2.34`
+- const defines a constant reference to a value.
+
+
+
+=================Array map()====================
+- map() method creates a new array with the results of calling a function
+for every array element.
+*************************
+const numbers = [1, 2, 3, 4];
+
+//double. Map allows us to manipulate each array element
+const doubled = numbers.map(x => x * 2);
+
+console.log(doubled);
+
+//iterate through our array
+for (let x of doubled) {
+    console.log(x);
+}
+
+/*
+ React_Tutorial\map>node double.js
+[ 2, 4, 6, 8 ]
+2
+4
+6
+8
+
+ */
+*************************
+
+======Map() in React=====
+- Is used to render lists of elements
+- In the below example we map the elements to a <li> tag
+*************main.jsx******************
+import {createRoot} from 'react-dom/client'
+
+const fruitlist=['apple', 'banana', 'cherry'];
+
+function MyList(){
+  return (
+    <ul>
+      {fruitlist.map(fruit=>
+        <li key={fruit}>{fruit}</li>
+      )}
+    </ul>
+  );
+}
+
+createRoot(document.getElementById('root')).render(
+  <MyList/>
+)
+****************************************
+
+
+============map() with objects===============
+- We can use map with array objects.
+**************main.jsx************************
+import {createRoot} from 'react-dom/client'
+
+const maliciousIPs=[
+  {id:1, ip_address: '192.168.1.122', action:'blocked'},
+  {id:2, ip_address: '192.168.1.102', action:'blocked'},
+  {id:3, ip_address: '192.168.1.99', action:'blocked'}
+];
+
+function BlockedList(){
+  return (
+    <ul>
+      {maliciousIPs.map(ip=>
+        <li key={ip.id}>
+          {ip.ip_address} threat actor. Action taken: {ip.action}
+        </li>
+      )}
+    </ul>
+  );
+}
+
+createRoot(document.getElementById('root')).render(
+  <BlockedList/>
+)
+**********************************************
+
+
+==========map() parameters=========
+- Map() method takes three parameters:
+	currentValue->the current element being processed
+	index--> the index of the current element(optional)
+	array--> The array map was called upon(option)
+***********************main.jsx**********************
+import { createRoot } from 'react-dom/client'
+
+const fruits=['apple', 'banana', 'mango'];
+
+function App(){
+  return (
+    <ul>
+      {fruits.map((fruit, index, array)=>{
+        return (
+          <li key={fruit}>
+            Name: {fruit}, Index: {index}, Array: {array}
+          </li>
+        );
+      })}
+    </ul>
+  );
+}
+
+createRoot(document.getElementById('root')).render(
+  <App/>
+)
+*****************************************************
+N/B: map() method always returns a New array. It does not modify
+the original array.
+
+
+==========Destructing Arrays===========
+- Destructing makes React code cleaner and more readable by reduing repetitive
+object and array access
+- Destructing comes in handy when a function returns an array.
+********************************************
+function dateInfo(dat) {
+    const d = dat.getDate();
+    const m = dat.getMonth() + 1;
+    const y = dat.getFullYear();
+
+    return [d, m, y];
+}
+
+
+//
+const [date, month, year] = dateInfo(new Date());
+
+console.log(`Date: ${date}`);
+console.log(`Month: ${month}`);
+console.log(`Year: ${year}`);
+
+/*
+Destructing_Arrays>node examp_1.js
+Date: 10
+Month: 9
+Year: 2026
+
+*/
+********************************************
+
+
+==============Destructing Objects=================
+- You can use destructing to extract the values from an object:
+********************************************
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Destructing</title>
+</head>
+<body>
+    <p id="demo"></p>
+
+    <script>
+        const person = {
+            firstName: "John",
+            lastName: "Doe",
+            age: 50
+        };
+
+        //Destructing
+        let {
+            firstName,
+            lastName,
+            age
+        } = person;
+
+        // Access each variable separately:
+        document.getElementById('demo').innerHTML = `First Name: ${firstName}`;
+    </script>
+</body>
+
+</html>
+********************************************
+
+
+==========Destructing in REACT componets==========
+- Is particularly useful in React for working with props, hooks, and API responses
+- It helps make your code more concise and easier to read.
+- Makes your code more concise and easier to read
+
+=====Props Destructuring====
+- When a component receives props, you can use destructing to extract the
+values you need.
+
+
+===============Spread Operator===============
+- Copies part of an existing array or object into another array or object.
+- Combined with destructing
+***********Example**************************
+const num1 = [1, 2, 3, 4];
+const num2 = [5, 6, 7, 8];
+
+const numCombined = [...num1, ...num2];
+
+//iterate through the new array
+console.log(numCombined);
+for (num of numCombined) {
+    console.log(num);
+}
+
+/*
+\spreed_operator>node examp_1.js
+[
+  1, 2, 3, 4,
+  5, 6, 7, 8
+]
+1
+2
+3
+4
+5
+6
+7
+8
+
+*/
+********************************************
+
+- We can use Spread operator with objects too:
+********************Example_2**********************
+const car = {
+    brand: 'Ford',
+    model: 'Mustang',
+    color: 'red'
+}
+
+const car_more = {
+    type: 'car',
+    year: 2021,
+    color: 'yellow'
+}
+
+
+const myCar = {
+    ...car,
+    ...car_more
+}
+
+console.log(myCar);
+
+/*
+spreed_operator>node with_objects.js
+{
+  brand: 'Ford',
+  model: 'Mustang',
+  color: 'yellow',
+  type: 'car',
+  year: 2021
+}
+
+*/
+******************************************************************
+NOTE: The properties that did not match were added, and the property that
+did match were overwritten by the last object.
+
+ 
+
+============Modules==================
+- JavaScript allows you to break up your code into seperate files
+- Makes it easier to maintain the code-base
+- Modules rely on the import and export statements.
+
+=====Export=====
+- You can export a function or variable from any file
+**************person.js*******************
+const name = 'Doe';
+const age = 30;
+
+//can be accessed from another file
+export { name, age };
+******************************************
+
+==========Default Exports================
+- We can only have one default one export in a file.
+**************message.js**************************
+const message = () => {
+    const name = "Doe";
+    const age = 23;
+    return name + ' is ' + age + ' years old.';
+}
+
+export default message;
+************************************************
+
+=====Import======
+- We import modules into a file by whether they are named exports or
+default exports.
+- Named exports must be destructured using curly braces. Default exports
+do not.
+****************************default_import************************************************
+import message from "./message.js";
+
+console.log(message());
+
+/*
+dules_Js>node default_Export.js
+(node:13400) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///J:/14_talk_back/3_React_Basics/React_Tutorial/Modules_Js/default_Export.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to J:\14_talk_back\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+Doe is 23 years old.
+
+*/
+************************************************************************************************
+
+
+===========Ternary Operator=================
+- Is a simplified conditional operator like if/else.
+- Syntax:
+	condition?<expression if true>:<expression if false>
+****************************Examp*******************************
+const renderApp = () => {
+    console.log('Rendering App');
+    return '[+]Loading Application';
+}
+
+const renderLogin = () => {
+    return '[-]Please Login.....'
+}
+
+const authenticated = true;
+
+//ternary operator
+authenticated ? renderApp() : renderLogin();
+
+/*
+\ternary>node examp.js
+Rendering App
+
+ */
+****************************************************************
+
+
+==============Template Strings=====================
+- Allow you to write strings that span multiple lines and include embedded 
+expressions.
+- Template strings use backticks(``)instead of quotes and include:
+	> multiple lines without \n
+	> Expressions inside ${}
+	> Quotes without escaping
+*********************Example_1**************************
+const isAdmin = true;
+
+const message = `Status: ${isAdmin?'Admin':'User'}`;
+
+console.log(message);
+
+/**
+ \template_strings>node examp.js
+Status: Admin
+
+ */
+********************************************************
