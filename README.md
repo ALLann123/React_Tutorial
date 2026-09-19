@@ -8,3 +8,7 @@ After Login:
 
 <img width="750" height="410" alt="image" src="https://github.com/user-attachments/assets/429e8ad5-4450-4a58-ad5c-aca15a6e1661" />
 
+
+# Project 2: Typing Game
+
+<img width="1102" height="599" alt="image" src="https://github.com/user-attachments/assets/96427aba-4703-433f-9f84-7a738d2417f6" />
