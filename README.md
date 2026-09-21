@@ -12,3 +12,7 @@ After Login:
 # Project 2: Typing Game
 
 <img width="1102" height="599" alt="image" src="https://github.com/user-attachments/assets/96427aba-4703-433f-9f84-7a738d2417f6" />
+
+# Project 3: Weather App
+
+<img width="1266" height="457" alt="image" src="https://github.com/user-attachments/assets/91dbd042-433f-40ce-a085-f2376db3e697" />
