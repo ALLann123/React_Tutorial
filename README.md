@@ -16,3 +16,7 @@ After Login:
 # Project 3: Weather App
 
 <img width="1266" height="457" alt="image" src="https://github.com/user-attachments/assets/91dbd042-433f-40ce-a085-f2376db3e697" />
+
+# Project 4: Lyrics Generator
+
+<img width="1192" height="660" alt="image" src="https://github.com/user-attachments/assets/6c886e87-b5c2-455d-80ed-f87097b9ec63" />
