@@ -1,0 +1,670 @@
+- Create a new project:
+	cmd>> npm create vite@latest use_me -- --template react
+
+===================Conditional Rendering==================
+- We are able to conditionally render componentss
+
+=====if Statement=====
+- Use them to decide which component to render
+*****************main.jsx********************************
+import { createRoot } from 'react-dom/client'
+
+function MissedGoal(){
+  return <h1>Missed!!</h1>;
+}
+
+function MadeGoal(){
+  return <h1>Goal!!!</h1>;
+}
+
+//conditional
+function Goal(props){
+  //get the input passed here
+  const isGoal=props.isGoal;
+  
+  if(isGoal){
+    return <MadeGoal/>
+  }
+
+  return <MissedGoal/>
+}
+
+createRoot(document.getElementById('root')).render(
+  <Goal isGoal={false}/>;
+)
+*********************************************************
+
+
+
+=================Logical && Operatoe============
+- We can render a react component by using the && operator
+- The heading will only be rendered if the props.brand property is not empty
+- Not empty evaluates to True.
+*****************main.jsx********************************
+import { createRoot } from 'react-dom/client'
+
+function Car(props){
+  return (
+    <>
+      {props.brand && <h1>My car is a {props.brand}</h1>}
+    </>
+  );
+}
+
+createRoot(document.getElementById('root')).render(
+  <Car brand="Ford"/>
+)
+*********************************************************
+
+
+
+==================Ternary Operator===================
+- Another way to conditionally render elements is by using a ternary
+operator.
+	condition ? true:false
+*****************main.jsx********************************
+import { createRoot } from 'react-dom/client'
+
+function MissedGoal(){
+  return <h1>MISSED!!</h1>;
+}
+
+function MadeGoal(){
+  return <h1>GOAL!!</h1>;
+}
+
+function Goal(props){
+  const isGoal=props.isGoal;
+  
+  return (
+    <>
+      {isGoal ? <MadeGoal/> : <MissedGoal/>}
+    </>
+  );
+}
+
+createRoot(document.getElementById('root')).render(
+  <Goal isGoal={false}/>
+);
+*********************************************************
+
+
+
+========React Lists===============
+- We render lists with some type of loop
+- map() array is the preferred method
+*****************main.jsx********************************
+import { createRoot } from 'react-dom/client'
+
+function MyCars(){
+  const cars=['Ford', 'BMW', 'Audi'];
+
+  return (
+    <>
+      <h1>My Cars:</h1>
+      <ul>
+        {cars.map((car)=> <li>I am a {car}</li>)}
+      </ul>
+    </>
+  );
+}
+
+createRoot(document.getElementById('root')).render(
+  <MyCars/>
+)
+*********************************************************
+- Code runs but we have no key provided to iterate through the list
+
+
+============Keys in React Lists============
+- Allow react to keep track of elements.
+- If item is updated or removed only that item will be re-rendered instead 
+of the entire list.
+*****************main.jsx********************************
+import { createRoot } from 'react-dom/client'
+
+function MyCars(){
+  const cars=[
+    {id:1001, brand:"Ford"},
+    {id:1002, brand:"BMW"},
+    {id:1003, brand:"Audi"}
+  ];
+
+  return (
+    <>
+      <h1>My Cars:</h1>
+      <ul>
+        {cars.map((car)=> <li key={car.id}>I am a {car.brand}</li>)}
+      </ul>
+    </>
+  );
+}
+
+createRoot(document.getElementById('root')).render(
+  <MyCars/>
+)
+*********************************************************
+
+
+
+======================Using Array Index as Keys===================
+- Not recommended to use this unless:
+	> The list is static(won't change)
+	> The list will never be reordered or filtered
+	> The items in the list have no IDs
+*****************main.jsx********************************
+import { createRoot } from 'react-dom/client'
+
+function MyCars(){
+  const cars=['Ford', 'BMW', 'Audi'];
+
+  return (
+    <>
+      <h1>My Cars:</h1>
+      <ul>
+        {cars.map((car, index)=> <li key={index}>I am a {car}</li>)}
+      </ul>
+    </>
+  );
+}
+
+createRoot(document.getElementById('root')).render(
+  <MyCars/>
+)
+*********************************************************
+
+
+
+=================React Forms====================
+- React uses forms to allow users to interact with the web Page
+- Adding forms in React
+*****************main.jsx********************************
+import { createRoot } from 'react-dom/client'
+
+function MyForm(){
+  return (
+    <form >
+      <label> Enter your Name: <input type="text" /></label>
+
+    </form>
+  );
+}
+
+createRoot(document.getElementById('root')).render(
+  <MyForm/>
+)
+*********************************************************
+N/B: Works as normal but we want to prevent this default behavior
+
+
+=========HTML Forms vs React Forms================
+- In react the form element is kept in the component's state property and
+updated only with the setState() function.
+- React provides a way to manage form data through component state.
+*****************main.jsx********************************
+import { createRoot } from 'react-dom/client'
+import {useState} from 'react'
+
+function MyForm(){
+  //Declare a state variable to hold input and function to update it
+  const [name, setName]=useState("");
+
+  //function to handle change in event
+  function handleChange(e){
+    setName(e.target.value);
+  }
+
+  return (
+    <form>
+      <label>Enter Name:
+        <input
+          type="text"
+          value={name}
+          onChange={handleChange}
+        />
+      </label>
+      <p>Current Value: {name}</p>
+    </form>
+  )
+}
+
+createRoot(document.getElementById('root')).render(
+  <MyForm/>
+)
+*********************************************************
+- To add an initial value:
+	const [name, setName]=useState("John")
+
+
+
+
+========================Submit Forms=======================
+- You can control the submit action by adding an event handler in the
+onSubmit attribute for the <form/>
+*****************main.jsx********************************
+import { createRoot } from 'react-dom/client'
+import {useState} from 'react'
+
+function MyForm(){
+  //Declare a state variable to hold input and function to update it
+  const [name, setName]=useState("John");
+
+  //function to handle change in event
+  function handleChange(e){
+    setName(e.target.value);
+  }
+
+  //submit button to trigger alert
+  function handleSubmit(e){
+    e.preventDefault();
+    alert(name);
+  }
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <label>Enter Name:
+        <input
+          type="text"
+          value={name}
+          onChange={handleChange}
+        />
+      </label><br/><br/>
+      <input type="submit"/>
+    </form>
+  )
+}
+
+createRoot(document.getElementById('root')).render(
+  <MyForm/>
+)
+*********************************************************
+
+
+=====================TextArea=========================
+- Is different than the HTML one
+- The value of the textarea is placed in a value attribute, just like
+with the input element.
+- Use useState Hook to manage the value of the textarea
+*****************main.jsx********************************
+import { createRoot } from 'react-dom/client'
+import {useState} from 'react'
+
+function MyForm(){
+  const [mytxt, setMytxt]=useState("");
+
+  function handleChange(e){
+    setMytxt(e.target.value);
+  }
+
+  return (
+    <form>
+      <label>Write here:
+        <textarea value={mytxt} onChange={handleChange}/>
+      </label>
+      <p>Current Value: {mytxt}</p>
+    </form>
+  )
+}
+
+createRoot(document.getElementById('root')).render(
+  <MyForm/>
+)
+*********************************************************
+
+
+===============Forms-Select====================
+- Drop down list, or a select box, in React is also a bit different from
+HTML
+*****************main.jsx********************************
+import { createRoot } from 'react-dom/client'
+import {useState} from 'react'
+
+function MyForm(){
+  const [myCar, setMyCar]=useState("Volvo")
+
+  const handleChange=(event)=>{
+    setMyCar(event.target.value)
+  }
+
+  return (
+    <form>
+      <select value={myCar} onChange={handleChange}>
+        <option value="Ford">Ford</option>
+        <option value="Volvo">Volvo</option>
+        <option value="BMW">BMW</option>
+      </select>
+    </form>
+  )
+}
+
+createRoot(document.getElementById('root')).render(
+  <MyForm/>
+)
+*********************************************************
+- React is able to track the inputs
+
+
+============Handling Multiple Inputs==================
+- We can manage their state either by:
+1. Using a separate useState call for each input
+2. Using a single useState call with an object to hold all form field values
+- Second is a more common approach for forms.
+*****************main.jsx******************************
+import { createRoot } from 'react-dom/client'
+import {useState} from 'react'
+
+function MyForm(){
+  const [inputs, setInputs]=useState({});
+
+  const handleChange=(e)=>{
+    const name=e.target.name;
+    const value=e.target.value;
+    setInputs(values=>({...values, [name]:value}))
+  }
+
+  return (
+    <form>
+      <label>First Name:
+        <input
+        type='text'
+        name='firstname'
+        value={inputs.firstname}
+        onChange={handleChange}
+        />
+      </label><br /><br />
+      <label>last Name: 
+        <input
+         type="text"
+         name='lastname'
+         value={inputs.lastname}
+         onChange={handleChange}
+        />
+      </label>
+      <p>Current Values: {inputs.firstname} {inputs.lastname}</p>
+    </form>
+  )
+}
+
+createRoot(document.getElementById('root')).render(
+  <MyForm/>
+)
+*********************************************************
+
+
+
+
+
+================Form-CheckBox==========================
+- For checkboxes use the "checked" attribute instead of value to control
+its state.
+- We'll use the useState Hook to manage the value of the textarea
+- In the handleChange function, use the e.target.type property check if
+the current input is a checkbox or not.
+*****************main.jsx******************************
+import { useState } from 'react';
+import { createRoot } from 'react-dom/client';
+
+function MyForm() {
+  const [inputs, setInputs] = useState({});
+
+  const handleChange = (e) => {
+    const target = e.target;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const name = target.name;
+    setInputs(values => ({...values, [name]: value}))
+  }
+
+  const handleSubmit = (event) => {
+    let fillings = '';
+    if (inputs.tomato) fillings += 'tomato';
+    if (inputs.onion) {
+      if (inputs.tomato) fillings += ' and ';
+      fillings += 'onion';
+    }
+    if (fillings == '') fillings = 'no fillings';
+    alert(`${inputs.firstname} wants a burger with ${fillings}`);
+    event.preventDefault();
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <label>My name is:
+      <input 
+        type="text" 
+        name="firstname" 
+        value={inputs.firstname} 
+        onChange={handleChange}
+      />
+      </label>
+
+      <p>I want a burger with:</p>
+      <label>Tomato:
+      <input 
+        type="checkbox" 
+        name="tomato" 
+        checked={inputs.tomato} 
+        onChange={handleChange}
+      />
+      </label>
+      <label>Onion:
+        <input 
+          type="checkbox" 
+          name="onion" 
+          checked={inputs.onion} 
+          onChange={handleChange}
+        />
+        </label>
+        <button type="submit">Submit</button>
+    </form>
+  )
+}
+
+createRoot(document.getElementById('root')).render(
+  <MyForm />
+);
+*********************************************************
+
+
+
+
+===================Radio========================
+- Radio buttons are used in groups where only one option can be selected
+- All radio buttons in a group should share the same name attribute.
+- You control radio buttons based on whether the radio buttons value
+matches the selected value in your state.
+*****************main.jsx******************************
+import { useState } from 'react';
+import { createRoot } from 'react-dom/client';
+
+function MyForm() {
+  const [selectedFruit, setSelectedFruit] = useState('banana');
+
+  const handleChange = (event) => {
+    setSelectedFruit(event.target.value);
+  };
+
+  const handleSubmit = (event) => {
+    alert(`Your favorite fruit is: ${selectedFruit}`);
+    event.preventDefault();
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <p>Select your favorite fruit:</p>
+      <label>
+        <input 
+          type="radio" 
+          name="fruit" 
+          value="apple" 
+          checked={selectedFruit === 'apple'} 
+          onChange={handleChange} 
+        /> Apple
+      </label>
+      <br />
+      <label>
+        <input 
+          type="radio" 
+          name="fruit" 
+          value="banana" 
+          checked={selectedFruit === 'banana'} 
+          onChange={handleChange} 
+        /> Banana
+      </label>
+      <br />
+      <label>
+        <input 
+          type="radio" 
+          name="fruit" 
+          value="cherry" 
+          checked={selectedFruit === 'cherry'} 
+          onChange={handleChange} 
+        /> Cherry
+      </label>
+      <br />
+      <button type="submit">Submit</button>
+    </form>
+  );
+}
+
+createRoot(document.getElementById('root')).render(
+  <MyForm />
+);
+*********************************************************
+
+
+
+
+
+======================React Portals==========================
+- Provides a way to render HTML outside the parent components DOM
+- This is particularly useful for components like modals, tooltips, and
+dialogs that need to break out of their container's layout.
+
+=====What are Portals?=======
+- Included in the react-dom package.
+- We use the createPortal method.
+- Syntax:
+**************************************
+import {createPortal} from 'react-dom';
+
+createPortal(children, domNode)
+**************************************
+children-> any renderable react content like elements, strings
+domNode-> Dom element where the portal should be inserted.
+*****************main.jsx******************************
+import { useState } from 'react';
+import { createRoot } from 'react-dom/client';
+import {createPortal} from 'react-dom';
+
+function Modal({isOpen, onClose, children}){
+  if(!isOpen) return null;
+
+  return createPortal(
+    <div style={{
+      position:'fixed',
+      top:0,
+      left:0,
+      right:0,
+      bottom:0,
+      backgroundColor:'rgba(0,0,0,0.5)',
+      display:'flex',
+      alignItems:'center',
+      justifyContent:'center'
+    }}>
+      <div style={{
+        background:'white',
+        padding:'20px',
+        borderRadius:'8px'
+      }}>
+        {children}
+        <button onClick={onClose}>Close</button>
+      </div>
+    </div>,
+    document.body
+  );
+}
+
+function MyApp(){
+  const [isOpen, setIsOpen]=useState(false);
+
+  return (
+    <div>
+      <h1>My App</h1>
+      <button onClick={()=> setIsOpen(true)}>
+        Open Modal
+      </button>
+
+    <Modal isOpen={isOpen} onClose={()=>setIsOpen(false)}>
+      <h2>Modal Content</h2>
+      <p>This content is rendered outside the App Component!</p>
+    </Modal>
+    </div>
+  );
+}
+
+createRoot(document.getElementById('root')).render(
+  <MyApp/>
+);
+*********************************************************
+- Why use Portals:
+	> Modals and Dialogs
+	> Tooltips
+	> Floating menus
+	> Notifications
+- Any UI element that needs to breakout of its containers layout.
+
+
+
+
+==================React Suspense===================
+- Lets you display an alternate HTML while waiting for code or data to
+load.
+- Can be a component, text or any valid content.
+
+=======What is Suspense?=======
+- React feature that lets your components display an alternative HTML while
+waiting for code or data to load.
+- Use cases:
+	> Data fetching with suspense enabled frameworks
+	> Loading components dynamically with React.lazy()
+*****************main.jsx******************************
+import { createRoot } from 'react-dom/client';
+import { Suspense, useState } from 'react';
+import MyCars from './cars.jsx'
+
+function App(){
+  return (
+    <div>
+      <Suspense fallback={<div>Loading.....</div>}>
+        <MyCars/>
+      </Suspense>
+    </div>
+  );
+}
+
+createRoot(document.getElementById('root')).render(
+  <App />
+);
+*********************************************************
+
+- Using the lazy component:
+*****************main.jsx******************************
+import { createRoot } from 'react-dom/client';
+import { Suspense, lazy } from 'react';
+
+const Cars=lazy(()=>import('./cars.jsx'));
+
+function App(){
+  return (
+    <div>
+      <Suspense fallback={<div>Loading.....</div>}>
+        <Cars/>
+      </Suspense>
+    </div>
+  );
+}
+
+createRoot(document.getElementById('root')).render(
+  <App />
+);
+*********************************************************
