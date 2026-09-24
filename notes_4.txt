@@ -1,0 +1,757 @@
+==============Styling React Using CSS=============
+- CSS styles:
+	> inline styling
+	> CSS stylesheets
+	> CSS Modules
+
+
+======Inline Styling======
+- To style an element with the inline style attribute, the value must be
+a JavaScript.
+- We have to put them in two sets of curly{{}} braces because in JS expressions
+are written in them.
+************main.jsx****************
+import { createRoot } from 'react-dom/client';
+import { Suspense, lazy } from 'react';
+
+const Header=()=>{
+  return (
+    <>
+      <h1 style={{color:"red"}}>Hello Style</h1>
+      <p>Add a little Style!</p>
+    </>
+  );
+}
+
+function App(){
+  return (
+    <div>
+      <Header/>
+      <h2 style={{color:"blue"}}>Who am I?</h2>
+    </div>
+  );
+}
+
+createRoot(document.getElementById('root')).render(
+  <App />
+);
+************************************
+
+
+=========camelCased Property Names=============
+- Since CSS is written in a JavaScript object, properties with hyphen
+separators, like "background-color" will be "backgroundColor"
+*******************main.jsx****************************
+import { createRoot } from 'react-dom/client';
+import { Suspense, lazy } from 'react';
+
+const Header=()=>{
+  return (
+    <>
+      <h1 style={{color:"red", backgroundColor:"green"}}>Hello Style</h1>
+      <p>Add a little Style!</p>
+    </>
+  );
+}
+
+function App(){
+  return (
+    <div>
+      <Header/>
+      <h2 style={{color:"blue" backgroundColor:"yellow"}}>Who am I?</h2>
+    </div>
+  );
+}
+
+createRoot(document.getElementById('root')).render(
+  <App />
+);
+***************************************************************
+
+
+===========JavaScript Object===========
+- Create an object with styling information, and refer to it in the style
+attribute
+*******************main.jsx****************************
+import { createRoot } from 'react-dom/client';
+import { Suspense, lazy } from 'react';
+
+const App=()=>{
+  const myStyle={
+    color:"White",
+    backgroundColor:"DodgerBlue",
+    padding:"10px",
+    fontFamily:"Sans-Serif"
+  };
+
+  return (
+    <>
+      <h1 style={myStyle}>Hello Style!!</h1>
+      <p>Add a little Style!</p>
+    </>
+  )
+}
+
+createRoot(document.getElementById('root')).render(
+  <App />
+);
+*******************************************************
+
+
+===========CSS StyleSheet===============
+- Write our css styling in a separate file, save it with ".css" file
+extension, and import it in your application.
+- Create "MyStylesheet.css" and insert the code:
+*******************MyStylesheet.css********************
+body {
+    background-color: #282c34;
+    color: white;
+    padding: 40px;
+    font-family: sans-serif;
+    text-align: center;
+}
+*******************************************************
+
+- Use the import statement to import the stylesheet:
+*******************main.jsx***************************
+import { createRoot } from 'react-dom/client';
+import "./MyStylesheet.css";
+
+const App=()=>{
+
+  return (
+    <>
+      <h1>Hello Style!!</h1>
+      <p>Add a little Style!</p>
+    </>
+  )
+}
+
+createRoot(document.getElementById('root')).render(
+  <App />
+);
+*******************************************************
+
+
+
+=================CSS Modules====================
+- We can use CSS modules
+- Are available to the component using it
+- Create a file with ".module.css" extension:
+*******************my-style.module.css*****************
+.bigred {
+    color: tomato;
+    padding: 40px;
+    font-family: sans-serif;
+    text-align: center;
+}
+*******************************************************
+
+- Import the style in our component
+*******************main.jsx***************************
+import { createRoot } from 'react-dom/client';
+import "./MyStylesheet.css";
+import styles from './my-style.module.css'
+
+const App=()=>{
+
+  return (
+    <>
+      <h1 className={styles.bigred}>Hello Style!!</h1>
+      <p>Add a little Style!</p>
+    </>
+  )
+}
+
+createRoot(document.getElementById('root')).render(
+  <App />
+);
+*******************************************************
+
+
+
+
+===================React CSS Modules=====================
+- CSS modules let you write CSS that is scoped locally to a specific component
+- Prevents CSS class name conflicts and makes your styles more maintainable
+
+======What are CSS Modules?========
+- Are CSS files where class names are scoped locally by default.
+- Needs the extension ".module.css". Import it after
+*******************button.module.css*****************
+.mybutton {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    color: black;
+    background-color: red;
+}
+*******************************************************
+
+- Now import our module css file and use it to the specific component.
+*******************main.jsx***************************
+import { createRoot } from 'react-dom/client';
+import styles from "./Button.module.css";
+
+const App=()=>{
+  return(
+    <>
+      <button className={styles.mybutton}>
+        Click Me
+      </button>
+    </>
+  )
+}
+
+createRoot(document.getElementById('root')).render(
+  <App />
+);
+*******************************************************
+
+
+===========Multiple Classes==================
+-  We can add more classes:
+*******************button.module.css*****************
+.mybutton {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.primary {
+    background-color: #007bff;
+    color: white;
+}
+
+.secondary {
+    background-color: #6c757d;
+    color: white;
+}
+*******************************************************
+
+- Import our css module
+*******************main.jsx***************************
+import { createRoot } from 'react-dom/client';
+import styles from "./Button.module.css";
+
+const App=()=>{
+  return(
+    <>
+      <button className={`${styles.mybutton} ${styles.primary}`}>
+        Click Me
+      </button><br /><br />
+      <button className={`${styles.mybutton} ${styles.secondary}`}>
+        Again Me
+      </button>
+    </>
+  )
+}
+
+createRoot(document.getElementById('root')).render(
+  <App />
+);
+*******************************************************
+
+
+==================GLobal CSS==============
+- We may want our styling to be available to all components.
+*******************button.module.css*****************
+:global(.myheader) {
+    padding: 10px 20px;
+    font-size: 50px;
+    color: white;
+    background-color: dodgerblue;
+}
+
+.myparagraph {
+    font-size: 20px;
+    color: white;
+    background-color: purple;
+}
+*******************************************************
+
+*******************main.jsx***************************
+import { createRoot } from 'react-dom/client';
+import styles from "./my-style.module.css";
+
+const App=()=>{
+  return(
+    <>
+      <h1 className="myheader">Header</h1>
+
+      <p className={styles.myparagraph}>Hello, Ich Bin</p>
+    </>
+  )
+}
+
+createRoot(document.getElementById('root')).render(
+  <App />
+);
+*******************************************************
+
+
+==============React CSS-in-JS===================
+- Is a styling technique where you can write CSS direcly in your JS code
+- Allows you to:
+	> write CSS using JS
+	> Create component-scoped styles
+	> Use dynamic styles based on props
+	> Avoid CSS class name conflicts
+- Use the library: "styled-components"
+	cmd>> npm install styled-components
+
+- Write CSS inside .jsx files:
+*******************main.jsx***************************
+import { createRoot } from 'react-dom/client';
+import styled from 'styled-components';
+
+const MyHeader=styled.h1`
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+`;
+
+const App=()=>{
+  return(
+    <>
+      <MyHeader> Welcome!</MyHeader>
+    </>
+  )
+}
+
+createRoot(document.getElementById('root')).render(
+  <App />
+);
+*******************************************************
+
+
+
+=================Props in Styled Components=================
+- A powerful feature of CSS-in-JS is the ability to use props to make 
+styles dynamic
+*******************main.jsx***************************
+import { createRoot } from 'react-dom/client';
+import styled from 'styled-components';
+
+const Button=styled.button`
+  padding:10px 20px;
+  border: none;
+  border-radius: 4px;
+  background-color: ${props=> props.btntype==='primary' ? '#007bff' : '#6c757d'};
+  color: white;
+  cursor: pointer;
+`;
+
+const App=()=>{
+  return(
+    <>
+      <Button btntype="primary">Primary Button</Button>
+      <br />
+      <br />
+      <Button>Secondary Button</Button>
+    </>
+  )
+}
+
+createRoot(document.getElementById('root')).render(
+  <App />
+);
+*******************************************************
+
+
+=====================Extending Styles======================
+- SImilar to inheritance
+- Letting multiple elements have the same styles.
+*******************main.jsx***************************
+import { createRoot } from 'react-dom/client';
+import styled from 'styled-components';
+
+const Button=styled.button`
+  padding:10px 20px;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+`;
+
+const PrimaryButton=styled(Button)`
+  background-color: #007bff;
+`;
+
+const SecondaryButton=styled(Button)`
+  background-color: #28a745;
+`;
+
+const App=()=>{
+  return(
+    <>
+      <PrimaryButton>Primary</PrimaryButton>
+      <br />
+      <br />
+      <SecondaryButton>Secondary</SecondaryButton>
+    </>
+  )
+}
+
+createRoot(document.getElementById('root')).render(
+  <App />
+);
+*******************************************************
+
+
+====================Global Styles====================
+- We can create global styles, which will be given normal class name and
+will be available for all components.
+*******************main.jsx***************************
+import { createRoot } from 'react-dom/client';
+import {createGlobalStyle} from 'styled-components';
+
+const GlobalStyle=createGlobalStyle`
+  h1{
+    color: white;
+    background-color: purple;
+    font-family: Arial, sans-serif;
+  }
+
+  .myparagraph{
+    font-family: courier, monospace;
+    color: blue;
+  }
+`;
+
+const App=()=>{
+  return(
+    <>
+      <GlobalStyle/>
+      <h1>Welcom!</h1>
+      <p className='myparagraph'>This is styled from global</p>
+    </>
+  )
+}
+
+createRoot(document.getElementById('root')).render(
+  <App />
+);
+*******************************************************
+
+
+
+================React Router======================
+- Is a library that provides react routing capabilities for React Applications
+- Routing means handling navigation between different views.
+- Enables:
+	> Create multiple pages in your single-page application
+	> Handle URL parameters and query strings
+	> Manage Browser history and navigation
+	> Create nested routes and layouts
+	> Implement protected routes for authentication.
+- Without a router, our react will be limited to a single page with no
+way to navigate between different views.
+
+
+
+=======Install React Router=======
+	cmd>> npm install react-router-dom
+
+
+=====Wrap Your App with BrowserRouter=====
+- Your application must be wrapped with the BrowserRouter component to
+enable routing.
+**************************
+function App(){
+  return(
+    <BrowserRouter>
+      {/*You App content Here */}
+    </BrowserRouter>
+  );
+}
+**************************
+
+=====Create Views======
+- Create three pages(or views) in our application:
+	1. Home
+	2. About
+	3. Contact
+
+- Create all three views in the same file for simplicity, but you can
+of course split them into separate files.
+****************main.jsx********************
+function Home(){
+  return <h1>Home Page</h1>;
+}
+
+function About(){
+  return <h1>About Page</h1>;
+}
+
+function Contact(){
+  return <h1>Contact Page</h1>;
+}
+********************************************
+
+
+=============Basic Routing================
+- React Router uses three main components for basic routing
+	> Link: Creates navigation links that update the URL
+	> Routes: A container for all your route definitions
+	> Route: Defines a mapping between a URL path and a component.
+- Add navigation links and routes for each link.
+****************main.jsx********************
+import { createRoot } from 'react-dom/client';
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+
+function Home() {
+  return <h1>Home Page</h1>;
+}
+
+function About() {
+  return <h1>About Page</h1>;
+}
+
+function Contact() {
+  return <h1>Contact Page</h1>;
+}
+
+function App() {
+  return (
+    <BrowserRouter>
+      {/* Navigation */}
+      <nav>
+        <Link to="/">Home</Link> |{" "}
+        <Link to="/about">About</Link> |{" "}
+        <Link to="/contact">Contact</Link>
+      </nav>
+
+      {/* Routes */}
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
+      </Routes>
+    </BrowserRouter>
+  );
+}
+
+createRoot(document.getElementById('root')).render(
+  <App />
+);
+********************************************
+- In the above example:
+	> BrowserRouter: wraps your app and enables routing functionality
+	> Link: components create navigation links
+	> Routes and Route define your routing configuration.
+
+
+
+=========Nested Routes================
+- You have a route inside another Route--> nested routing
+- Nested routes allow you change parts of the page when you navigate
+to a new URL while other parts is not changed or reloaded--> Having a
+page within a page.
+- Example: add two new components that will be rendered inside the products
+component.
+One called CarProducts and one called BikeProducts:
+****************main.jsx********************
+import { createRoot } from 'react-dom/client';
+import { BrowserRouter, Routes, Route, Link, Outlet } from 'react-router-dom';
+
+function Home() {
+  return <h1>Home Page</h1>;
+}
+
+function Products(){
+  return (
+    <div>
+      <h1>Products Page</h1>
+      <nav style={{marginBottom: '20px'}}>
+        <Link to="/products/car">Cars</Link> | {" "}
+        <Link to="/products/bike">Bikes</Link> | {" "}
+      </nav>
+      <Outlet/>
+    </div>
+  );
+}
+
+function CarProducts(){
+  return(
+    <div>
+      <h2>Cars</h2>
+      <ul>
+        <li>Audi</li>
+        <li>BMW</li>
+        <li>Volvo</li>
+      </ul>
+    </div>
+  );
+}
+
+function BikeProducts(){
+  return (
+    <div>
+      <h2>Bikes</h2>
+      <ul>
+        <li>Suzuki</li>
+        <li>Yamaha</li>
+        <li>Honda</li>
+      </ul>
+    </div>
+  );
+}
+
+function Contact() {
+  return <h1>Contact Page</h1>;
+}
+
+function App() {
+  return (
+    <BrowserRouter>
+      {/* Navigation */}
+      <nav>
+        <Link to="/">Home</Link> |{" "}
+        <Link to="/products">Products</Link> |{" "}
+        <Link to="/contact">Contact</Link>
+      </nav>
+
+      {/* Routes */}
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/products" element={<Products />}>
+          <Route path='car' element={<CarProducts/>}/>
+          <Route path='bike' element={<BikeProducts/>}/>
+        </Route>
+        <Route path="/contact" element={<Contact />} />
+      </Routes>
+    </BrowserRouter>
+  );
+}
+
+createRoot(document.getElementById('root')).render(
+  <App />
+);
+********************************************
+1. Outlet:
+- <Outlet/> element in the products component specifies where to render
+the child route's content
+
+2. Routes:
+- The routes element contains the routes to CarProducts and BikeProducts as
+child routes of the Products parent route.
+
+3. URL Structure:
+- The URL structure is relative to the parent route's path. E.G
+	> "products/car" the CarProducts component is rendered.
+
+
+=============Style Active Links==============
+- Special Link component called NavLink. Knows whether the link's URL
+is active or not
+- NavLink is especially useful for:
+	> Navigation Menus
+	> BreadCrumbs
+	> Tabs
+- A NavLink is considered active if the current URL matches its to prop
+
+
+
+================URL Parameters================
+- Variables that can add data to your components
+- Are used to pass data between components.
+****************main.jsx********************
+import { createRoot } from 'react-dom/client';
+import { BrowserRouter, Routes, Route, Link, Outlet, useParams } from 'react-router-dom';
+
+const Info=()=>{
+  const {firstname}=useParams();
+  return <h1>Hello, {firstname}</h1>;
+}
+
+function App() {
+  return (
+    <BrowserRouter>
+      {/* Navigation */}
+      <nav>
+        <Link to="/customer/Emil">Emil</Link> | {" "}
+        <Link to="/customer/Tobias">Tobias</Link> | {" "}
+        <Link to="/customer/Linux">Linux</Link> | {" "}
+
+      </nav>
+      <Routes>
+        <Route path='/customer/:firstname' element={<Info/>}/>
+      </Routes>
+    </BrowserRouter>
+  );
+}
+
+createRoot(document.getElementById('root')).render(
+  <App />
+);
+********************************************
+
+
+=======================React Transitions======================
+What is useTransition?
+- Helps you keep your React app responsive during heavy updates.
+- Mark states as non-urget and other allowed as more urgent during updates.
+
+
+======When to Use Transitions=========
+- When you have:
+	> A slow operation that might freeze UI
+	> Updates that aren't immediately critical
+	> Search results that take time to display
+
+
+======Basic Example====
+- useTransition hook returns two items:
+	> isPending: tells you if a transition is active
+	> startTransition: function to mark updates as transitions
+***************main.jsx****************************
+import { createRoot } from 'react-dom/client';
+import { useState, useTransition } from 'react';
+
+function SearchResults({query}){
+  //Simulate slow search results
+  const items=[];
+  if(query){
+    for(let i=0; i<1000;i++){
+      items.push(<li key={i}>Result for {query}-{i}</li>);
+    }
+  }
+  return <ul>{items}</ul>
+}
+
+function App() {
+  const [input, setInput]=useState('');
+  const [query, setQuery]=useState('');
+  const [isPending, startTransition]=useTransition();
+
+  const handleChange=(e)=>{
+    //Urgent: Update input field
+    setInput(e.target.value);
+
+    //Non-Urgent: Update search results
+    startTransition(()=>{
+      setQuery(e.target.value);
+    });
+  };
+
+  return (
+    <div>
+      <input
+       type="text"
+       value={input}
+       onChange={handleChange}
+       placeholder='Type to search'
+      />
+      {isPending && <p>Loading Results...</p>}
+      <SearchResults query={query}/>
+    </div>
+  );
+}
+
+createRoot(document.getElementById('root')).render(
+  <App />
+);
+************************************************************
