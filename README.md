@@ -20,3 +20,7 @@ After Login:
 # Project 4: Lyrics Generator
 
 <img width="1192" height="660" alt="image" src="https://github.com/user-attachments/assets/6c886e87-b5c2-455d-80ed-f87097b9ec63" />
+
+# Project 5: Chatbot in Web-UI(React with Flask backend)
+
+<img width="1366" height="681" alt="chatbot" src="https://github.com/user-attachments/assets/ce121456-a19d-4a5c-aec5-6b449f5a92d3" />
