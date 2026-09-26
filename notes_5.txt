@@ -1,0 +1,89 @@
+==========React Hooks=============
+- Hooks allow functions to have access to state and other React Features
+without using classes.
+- Direct API to react concepts
+
+**************main.jsx*****************
+import { useState } from 'react';
+import { createRoot } from 'react-dom/client';
+
+function FavoriteColor() {
+  const [color, setColor] = useState("red");
+
+  return (
+    <>
+      <h1>My favorite color is {color}!</h1>
+      <button
+        type="button"
+        onClick={() => setColor("blue")}
+      >Blue</button>
+      <button
+        type="button"
+        onClick={() => setColor("red")}
+      >Red</button>
+      <button
+        type="button"
+        onClick={() => setColor("pink")}
+      >Pink</button>
+      <button
+        type="button"
+        onClick={() => setColor("green")}
+      >Green</button>
+    </>
+  );
+}
+
+createRoot(document.getElementById('root')).render(
+  <FavoriteColor />
+);
+***************************************************
+- Rules for hooks:
+	> only be called inside a component
+	> Cannot be conditional
+
+
+=============useState Hook=================
+- Allows us to track state in a function component
+- State refers to data or property that need to be tracking in an
+application.
+
+========Import useState==========
+- useState accepts an initial state and returns two values
+	> current state
+	> function that updates the state
+- One state can include objects:
+*********************main.jsx*********************
+import { useState } from 'react';
+import { createRoot } from 'react-dom/client';
+
+function MyCar(){
+  const [car, setCar]=useState({
+    brand:"ford",
+    model:"mustang",
+    year:1964,
+    color:"red"
+  });
+
+  //update the object and maintain the default values. Use a JS spread operator
+  const updateColor=()=>{
+    setCar(previousState=>{
+      return{...previousState, color:"blue"}
+    });
+  }
+
+  return (
+    <>
+    <h1>My {car.brand}</h1>
+    <p>
+      It is a {car.color} {car.model} from {car.year}
+    </p>
+
+    <button type='button' onClick={updateColor}>Blue</button>
+    </>
+  );
+}
+
+createRoot(document.getElementById('root')).render(
+  <MyCar />
+);
+***************************************************
