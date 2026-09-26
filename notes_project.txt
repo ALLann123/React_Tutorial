@@ -1,0 +1,166 @@
+============Revision=============
+- Arrow Functions
+- .map() method
+
+
+==========We do not need to write so much CSS=======
+- Bootstrap
+- HubSpot templates
+	> Saved to google_Drive
+
+
+=========Component================
+- Any function in Javascript that returns JSX code.
+- Part of your application
+- A module.
+- Convert how we think into different components.
+- We can have a video component(A Jsx function):
+	> We are able to reuse the components multiple times
+- Each component can have multiple components in it.
+- Returns one parent element.:
+	> Have one DIV only being returned
+- Dynamic parts of our applications are called state
+`State`: is something where once it's updated, the component will change
+and re-render itself to show the new state.
+- When a State Change occurs, the entire components is reran or re-rendered.
+
+
+====Download Nodejs=====
+- For windows and add to path
+
+======Initialize the React Project======
+- We use vite--> lightweight web server that allows us to run our React
+applications.
+	cmd>> npm create vite@latest frontend -- --template react
+
+- We go into the "frontend" directory and install the packages we want
+Our packages will be in the package.json
+N/B: JSX is Javascript and HTML combined.
+
+
+==========Fragment(<></>)==========
+- Is a place holder for the parent element.
+- Allows us to return 2 DIVS.
+***********app.jsx**************
+import './App.css'
+
+const Text=()=>{
+  return (
+    <div>
+      <p>Hello World!</p>
+    </div>
+  );
+}
+
+function App() {
+  return (
+    <>
+      <Text/>
+      <Text/>
+      <Text/>
+    </>
+  );
+}
+
+export default App
+import './App.css'
+
+const Text=()=>{
+  return (
+    <div>
+      <p>Hello World!</p>
+    </div>
+  );
+}
+
+function App() {
+  return (
+    <>
+      <Text/>
+      <Text/>
+      <Text/>
+    </>
+  );
+}
+
+export default App
+*****************************
+- Above demonstrate reusing a simple component.
+
+- Next, lets have customized component.
+Prop=Property
+*****************app.jsx***********************
+import './App.css'
+
+const Text=({display})=>{
+  return (
+    <div>
+      <p>{display}</p>
+    </div>
+  );
+}
+
+function App() {
+  return (
+    <>
+      <Text display="Hello World"/>
+      <Text display='Whats Up!'/>
+      <Text display='Have a nice day!!'/>
+    </>
+  );
+}
+
+export default App
+*********************************************************
+OR Alternatively use this:
+const Text=(props)=>{
+  return (
+    <div>
+      <p>{props.display}</p>
+    </div>
+  );
+}
+********************************
+N/B: Good thing about react we can use other peoples components that they
+build.
+
+=================Algorithm================
+1. We want to display a bunch of movies---> Movie card component.
+	Ask yourself what components do I need?
+- Best practice is to separate files in react.
+- Create directory "Components" inside it create file: MovieCard.jsx
+- When we want to use a user-defined module we use the key word "export"
+to export it. 
+
+
+
+=================Page Routing====================
+- To navigate to another page such as:
+	localhost/favorites
+We use a react router.
+- Install the library:
+	cmd>> npm install react-router-dom
+
+
+============API==============
+- Connect to a public API
+- Display movies
+
+We use async when calling APIs
+- Fetch() is a function you can use to send a network request.
+
+=====useEffect======
+- Allows you to run side effects to your components and decide when they
+should run.
+- Common when running an API, to check what has changed.
+
+LocalStorage: Allows us to store values directly within our browser.
+
+
+============For Secure APIs=========
+- use .gitignore
+- Install:
+	cmd>> npm install dotenv
+
+
+
