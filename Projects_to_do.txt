@@ -1,0 +1,16 @@
+1. Typing Speed Game
+2. Quiz App
+3. Form Filling Page
+4. Sign Up/Sign In page
+
+
+1. Weather Application.
+2. Currency Converter.
+3. Pair Forex Prices.
+4. Lyrics Finder.
+5. Meme Generator.
+
+
+1. Personal Blog.
+2. Paint App.
+3. Video to Gif converter.
