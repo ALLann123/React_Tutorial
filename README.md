@@ -28,3 +28,8 @@ After Login:
 # Project 6: CRUD- Item Management System(FastAPI and React)
 
 <img width="1319" height="689" alt="image" src="https://github.com/user-attachments/assets/6d26d465-be85-419e-805d-eccfa7a3eec1" />
+
+# Project 7: Image-To-Text(FastAPI(with Tesseract library) + React)
+
+<img width="1212" height="670" alt="image" src="https://github.com/user-attachments/assets/3892bdf9-4b52-4adb-8525-14b37bd1e862" />
+
