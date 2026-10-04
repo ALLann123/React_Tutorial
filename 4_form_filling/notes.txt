@@ -1,0 +1,45 @@
+===========Step 1========
+- Create the project:
+	cmd>> npm create vite@latest frontend -- --template react
+
+
+===========Step 2===========
+- Open VsCode
+- Delete "src/App.css" and "src/assets" directory.
+
+=========components/TextField.jsx=============
+- curly braces({label, name....}) are our props
+- htmlFor--> Is JSXs spelling of the HTML "for" and it connects the label
+to the input. Clicking the label focuses the input
+- {error && <p>...</p>} is conditional rendering. If error is empty
+nothing is drawn.
+- export default lets other files import the component.
+
+========Step 4:components/CheckboxField.jsx==========
+- Checkbox holds true or false values instead of value text.
+
+
+==========Step 5: components/SubmitButton.jsx===========
+- A button component to submit our form
+- Create src/components/SuccessMessage.jsx.
+- "onReset" function is passed down from the parent. The child calls it
+and the parent decides what happens. This is how children talk back to
+parents.
+
+
+============Step 6: components/RegistrationForm.jsx===============
+- useState(emptyForm)return a pair. the current value(values) and a
+function to update it(setValues)
+- State:
+	> Values holds what is typed
+	> errors holds the messages
+	> submitted says whether to show the form or the success message
+- handleChange is shared by every input.copies the new values and ensure
+the other fields stay unchanged.
+- evet.preventDefault() stops the browser from reloading page when
+form is submittd
+- validate is a plain function not components. Returns error objects
+- noValidate: turns off the browser's own popups so you can see our
+message
+
+
