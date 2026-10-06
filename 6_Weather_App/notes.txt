@@ -1,0 +1,30 @@
+=====Create Project====
+- Run:
+	cmd>> npm create vite@latest frontEnd -- --template react
+
+- Our weather APP API key:
+
+=====Important Files=====
+- "Main.jsx" file is where our application lives
+- Our code will be written in app.jsx then imported to main
+	> App.jsx contain our main weather application
+	> App.css contain styles specifically for our application
+	> index.css contains global CSS
+- Delete everything in App.jsx
+- Replace with new code.
+**********App.jsx************
+function App(){
+	return (
+		<p>...</p>
+	);
+}
+export default App;
+******************************
+App() is a react component
+- Components in react are independent and reusable bits of code.
+The component has a return type.
+- The return type determines what React should display on the page.
+NOTE: Should have one parent element.
+
+=======Add Some CSS=======
+- Open src/App.css
