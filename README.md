@@ -37,4 +37,5 @@ After Login:
 
 # Project 8: ChatApp(React+FastAPI(Locall Ollama Qwen Model)🚀🎉
 
+<img width="1324" height="590" alt="image" src="https://github.com/user-attachments/assets/3489d093-c893-4e77-bbea-773f1352c32b" />
 
