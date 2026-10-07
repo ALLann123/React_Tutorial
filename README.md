@@ -22,6 +22,8 @@ After Login:
 <img width="1192" height="660" alt="image" src="https://github.com/user-attachments/assets/6c886e87-b5c2-455d-80ed-f87097b9ec63" />
 
 # Project 5: Chatbot in Web-UI(React with Flask backend)
+<img width="1357" height="606" alt="image" src="https://github.com/user-attachments/assets/64e16ef7-6111-49db-848d-61097125cdef" />
+
 
 <img width="1366" height="681" alt="chatbot" src="https://github.com/user-attachments/assets/ce121456-a19d-4a5c-aec5-6b449f5a92d3" />
 
@@ -32,4 +34,7 @@ After Login:
 # Project 7: Image-To-Text(FastAPI(with Tesseract library) + React)
 
 <img width="1212" height="670" alt="image" src="https://github.com/user-attachments/assets/3892bdf9-4b52-4adb-8525-14b37bd1e862" />
+
+# Project 8: ChatApp(React+FastAPI(Locall Ollama Qwen Model)🚀🎉
+
 
