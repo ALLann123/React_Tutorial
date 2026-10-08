@@ -39,3 +39,6 @@ After Login:
 
 <img width="1324" height="590" alt="image" src="https://github.com/user-attachments/assets/3489d093-c893-4e77-bbea-773f1352c32b" />
 
+# Project 9: Voice Recorder
+
+<img width="1362" height="682" alt="image" src="https://github.com/user-attachments/assets/eae8b47d-43a7-4edc-a549-273e93e36a74" />
