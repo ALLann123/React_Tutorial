@@ -1,0 +1,210 @@
+/* Colors live in CSS variables so we can reuse them and change them in one place. */
+
+:root {
+    --ink: #17202b;
+    --muted: #5d6877;
+    --line: #cfd6df;
+    --page: #eef2f7;
+    --card: #ffffff;
+    --accent: #2f5bea;
+    --accent-dark: #2247c2;
+    --accent-soft: #dbe5ff;
+    --danger: #b42318;
+    --danger-soft: #fde7e4;
+    font-family: system-ui, "Segoe UI", Roboto, sans-serif;
+    color: var(--ink);
+    color-scheme: light;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: var(--page);
+}
+
+.page {
+    min-height: 100vh;
+    display: grid;
+    place-items: start center;
+    padding: 48px 24px;
+}
+
+.lyrics-app {
+    width: 100%;
+    max-width: 640px;
+}
+
+h1 {
+    margin: 0 0 20px;
+    font-size: 1.6rem;
+}
+
+
+/* ---------- Search form ---------- */
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.field label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+.field input {
+    width: 100%;
+    padding: 10px 12px;
+    font-size: 1rem;
+    color: var(--ink);
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+}
+
+.search-form button[type="submit"] {
+    width: 100%;
+    margin-top: 14px;
+    padding: 11px 18px;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #fff;
+    background: var(--accent);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.search-form button[type="submit"]:hover:not(:disabled) {
+    background: var(--accent-dark);
+}
+
+.search-form button[type="submit"]:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+input:focus-visible,
+button:focus-visible {
+    outline: 3px solid rgba(47, 91, 234, 0.35);
+    outline-offset: 1px;
+}
+
+
+/* ---------- Messages ---------- */
+
+.message {
+    margin: 20px 0 0;
+    color: var(--muted);
+}
+
+.message-error {
+    padding: 12px 14px;
+    color: var(--danger);
+    background: var(--danger-soft);
+    border-radius: 8px;
+}
+
+
+/* ---------- Match list ---------- */
+
+.match-list {
+    margin-top: 24px;
+}
+
+.section-label {
+    margin: 0 0 8px;
+    font-size: 0.9rem;
+    color: var(--muted);
+}
+
+.match-list ul {
+    display: grid;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.match {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    width: 100%;
+    padding: 10px 14px;
+    text-align: left;
+    color: var(--ink);
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.match:hover {
+    border-color: var(--accent);
+}
+
+.match.active {
+    background: var(--accent-soft);
+    border-color: var(--accent);
+}
+
+.match-title {
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.match-meta {
+    font-size: 0.875rem;
+    color: var(--muted);
+}
+
+
+/* ---------- Lyrics ---------- */
+
+.lyrics-view {
+    margin-top: 20px;
+    padding: 24px;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+}
+
+.lyrics-view h2 {
+    margin: 0;
+    font-size: 1.4rem;
+}
+
+.lyrics-meta {
+    margin: 4px 0 20px;
+    color: var(--muted);
+}
+
+
+/* pre-wrap keeps the line breaks and blank lines that are inside the lyrics text */
+
+.lyrics-text {
+    white-space: pre-wrap;
+    font-size: 1.05rem;
+    line-height: 1.75;
+}
+
+.instrumental {
+    margin: 0;
+    color: var(--muted);
+}
+
+
+/* Small screens: stack the two inputs */
+
+@media (max-width: 520px) {
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+}
