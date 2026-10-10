@@ -1,0 +1,213 @@
+========LangChain JS==========
+- LangChain version for Node Js
+- Install the dependancies:
+	cmd>> npm install @langchain/groq @langchain/core dotenv prompt-sync
+- Next, write the code:
+*******************main.js***************************
+//create our llm
+import { ChatGroq } from "@langchain/groq"
+import { HumanMessage, SystemMessage } from "@langchain/core/messages"
+
+//Initialize the LLM
+const model = new ChatGroq({
+    model: 'openai/gpt-oss-120b',
+    temperature: 0,
+    apiKey: 'gsk......'
+});
+
+
+//Send message to LLM
+async function conversation(humanInput) {
+    //Pass the human Input to the llm as Human Message
+    const response = await model.invoke([new HumanMessage(humanInput)]);
+
+    return response.content;
+}
+
+
+//call the LLM
+const humanInput = "Hello, define python in one sentence";
+const result = await conversation(humanInput);
+
+console.log(`AI: ${result}`);
+
+/*
+AI: Python is a high‑level, interpreted programming language known for its readability, dynamic typing, and extensive standard library that supports multiple programming paradigms.
+
+*/
+******************************************************
+
+
+================ChatBotify=================
+- Highly customized React Library that simplifies the process of intergrating
+a chatbot into your application.
+- Create project:
+	cmd>> mkdir ChatBot
+	cmd>> cd ChatBot
+	cmd>> npm create vite@latest frontEnd -- --template react
+- Install:
+	cmd>> npm install react-chatbotify
+- Delete everything in the src/app.jsx file and add:
+************app.jsx*****************
+import './App.css'
+import ChatBot from 'react-chatbotify'
+
+function App() {
+
+  return (
+    <>
+     <ChatBot/>
+    </>
+  )
+}
+
+export default App
+***********************************
+
+
+==========Craft Message==========
+- The component <ChatBot/> takes in props and by default:
+const flow={
+	"start":{
+		"message":"Hello Client"
+	}
+}
+
+
+************main.jsx********************
+import './App.css'
+import ChatBot from 'react-chatbotify'
+
+function App() {
+  const flow={
+    "start":{
+      "message":"Hello, How can I help?☺"
+    }
+  }
+  return (
+    <>
+     <ChatBot flow={flow}/>
+    </>
+  )
+}
+
+export default App
+****************************************
+- Now our application reloads and the default message when chatbot is clicked
+has been replaced to "Hello, How can I help?"
+
+
+
+============Create a Flask Backend==============
+- Flask is a simple python backend language.
+- We want our chatbot to make a POST request to our backend which will
+handle all the API calls to the model
+- Project structure:
+my-project/
+│
+├── backend/
+│   ├── app.py
+│   ├── .env
+│   └── requirements.txt
+│
+└── frontend/
+    ├── src/
+    │   ├── App.jsx
+    │   ├── llmApi.jsx
+    │   └── App.css
+    └── package.json
+****************************************
+- Make a new directory:
+	cmd>> mkdir backend
+- Virtual environment
+	cmd>> uv init
+- Activate the environment:
+	cmd>> .venv\Scripts\activate
+- Install dependancies:
+	cmd>> uv pip install flask flask-cors python-dotenv langchain-groq
+- Now set up our api key in the .env file.
+- Add the .env file to .gitignore to avoid uploading the file
+	cmd>> echo .env >> .gitignore
+- Save dependancies:
+	cmd>> pip freeze > requirements.txt
+- The backend code:
+************app.py**********************
+#!/usr/bin/python3
+from flask import Flask, request, jsonify
+from flask_cors import CORS
+from dotenv import load_dotenv
+from langchain_groq import ChatGroq
+from langchain_core.messages import HumanMessage
+import os
+
+# load env variables
+load_dotenv()
+
+# create flask App
+app=Flask(__name__)
+
+# allow requests from our React frontend
+CORS(app)
+
+# Create the Groq model
+model = ChatGroq(
+    model="openai/gpt-oss-120b",
+    temperature=0,
+    api_key=os.getenv("GROQ_API_KEY")
+)
+
+# chat endpoint
+@app.route("/chat", methods=["POST"])
+def chat():
+    # Get JSON sent by react
+    data=request.get_json()
+
+    # Extract user's message
+    human_input=data.get("message")
+
+    # check that message was provided
+    if not human_input:
+        return jsonify({
+            "error":"No message provided"
+        }), 400
+
+    try:
+        # Send message to groq
+        response=model.invoke([
+            HumanMessage(content=human_input)
+        ])
+
+        # send response back to react]
+        return jsonify({
+            "response":response.content
+        })
+
+    except Exception as e:
+        return jsonify({
+            "error":str(e)
+        }), 500
+
+# RUn flask Server
+if __name__=="__main__":
+    app.run(debug=True, port=5000)
+****************************************
+
+- Test the endpoint using powershell before using it in react:
+Powershell run:
+Invoke-RestMethod `
+    -Uri http://127.0.0.1:5000/chat `
+    -Method POST `
+    -ContentType "application/json" `
+    -Body '{"message":"Hello, who are you?"}'
+
+*************Result********************
+--------
+Hello! I’m ChatGPT, an AI language model created by OpenAI. I’m here to help answer your q...
+***************************************
+
+
+===================HTTP Request js==============
+- The js file "llmHit.js" will be used to make HTTP request to our flask server
+*****************llmHit.js***********************
+
+*************************************************
